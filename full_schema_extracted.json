@@ -1,0 +1,1284 @@
+{
+  "barTables": {
+    "CategoriasBar": [
+      {
+        "campo": "id_categoria",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "PK",
+        "obrigatorio": "Sim",
+        "descricao": "Identificador único da categoria"
+      },
+      {
+        "campo": "nome_categoria",
+        "tipo": "Texto (60)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Nome da categoria (ex.: Bebidas, Porções)"
+      },
+      {
+        "campo": "tipo_aplicacao",
+        "tipo": "Texto (20)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Identifica se a categoria é de Produto ou Serviço"
+      },
+      {
+        "campo": "status",
+        "tipo": "Booleano",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Ativo (1) ou Inativo (0)"
+      }
+    ],
+    "ProdutosServicos": [
+      {
+        "campo": "id_item",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "PK",
+        "obrigatorio": "Sim",
+        "descricao": "Identificador único do produto ou serviço"
+      },
+      {
+        "campo": "nome_item",
+        "tipo": "Texto (120)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Descrição comercial do item"
+      },
+      {
+        "campo": "tipo",
+        "tipo": "Texto (15)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Diferencia 'PRODUTO' ou 'SERVICO'"
+      },
+      {
+        "campo": "id_categoria",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Vincula à tabela CategoriasBar"
+      },
+      {
+        "campo": "unidade_medida",
+        "tipo": "Texto (10)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Unidade de medida (UN, KG, LT, DOSE)"
+      },
+      {
+        "campo": "preco_custo",
+        "tipo": "Decimal (10,2)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Valor de custo médio unitário"
+      },
+      {
+        "campo": "preco_venda",
+        "tipo": "Decimal (10,2)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Valor de venda praticado no PDV"
+      },
+      {
+        "campo": "estoque_minimo",
+        "tipo": "Decimal (10,2)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Nível de corte para alerta de reposição"
+      },
+      {
+        "campo": "estoque_atual",
+        "tipo": "Decimal (10,2)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Saldo físico atual no bar"
+      },
+      {
+        "campo": "codigo_barras",
+        "tipo": "Texto (30)",
+        "pk_fk": "",
+        "obrigatorio": "Não",
+        "descricao": "EAN/GTIN ou código interno para leitor"
+      }
+    ],
+    "MovimentacoesEstoque": [
+      {
+        "campo": "id_movimento",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "PK",
+        "obrigatorio": "Sim",
+        "descricao": "Identificador da movimentação física"
+      },
+      {
+        "campo": "id_item",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Vincula à tabela ProdutosServicos"
+      },
+      {
+        "campo": "tipo_movimento",
+        "tipo": "Texto (15)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "ENTRADA (Nota), SAIDA (Venda), AJUSTE (Perda)"
+      },
+      {
+        "campo": "quantidade",
+        "tipo": "Decimal (10,2)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Volume movimentado"
+      },
+      {
+        "campo": "data_hora",
+        "tipo": "DateTime",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Carimbo cronológico do evento"
+      },
+      {
+        "campo": "documento_origem",
+        "tipo": "Texto (50)",
+        "pk_fk": "",
+        "obrigatorio": "Não",
+        "descricao": "Número da NF ou ID da Venda geradora"
+      }
+    ],
+    "NotasFiscais": [
+      {
+        "campo": "id_nota",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "PK",
+        "obrigatorio": "Sim",
+        "descricao": "Identificador interno da nota recebida"
+      },
+      {
+        "campo": "numero_nf",
+        "tipo": "Texto (30)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Número oficial da NF-e"
+      },
+      {
+        "campo": "chave_acesso",
+        "tipo": "Texto (44)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Chave de acesso da SEFAZ"
+      },
+      {
+        "campo": "fornecedor_nome",
+        "tipo": "Texto (120)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Razão Social ou Nome Fantasia"
+      },
+      {
+        "campo": "fornecedor_cnpj",
+        "tipo": "Texto (18)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Cadastro Nacional de Pessoa Jurídica"
+      },
+      {
+        "campo": "valor_total_nf",
+        "tipo": "Decimal (12,2)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Montante bruto contábil da nota fiscal"
+      }
+    ],
+    "ItensNota": [
+      {
+        "campo": "id_item_nota",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "PK",
+        "obrigatorio": "Sim",
+        "descricao": "Identificador do item constante na nota"
+      },
+      {
+        "campo": "id_nota",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Vincula à tabela NotasFiscais"
+      },
+      {
+        "campo": "id_item",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Vínculo com o catálogo de ProdutosServicos"
+      },
+      {
+        "campo": "ncm",
+        "tipo": "Texto (8)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Nomenclatura Comum do Mercosul (8 dígitos)"
+      },
+      {
+        "campo": "cest",
+        "tipo": "Texto (7)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Código Especificador de Substituição Tributária (7 dígitos)"
+      },
+      {
+        "campo": "quantidade",
+        "tipo": "Decimal (10,2)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Quantidade faturada pelo fornecedor"
+      },
+      {
+        "campo": "valor_unitario",
+        "tipo": "Decimal (10,2)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Custo unitário faturado do item"
+      }
+    ],
+    "Vendas": [
+      {
+        "campo": "id_venda",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "PK",
+        "obrigatorio": "Sim",
+        "descricao": "Identificador único do cupom/comanda"
+      },
+      {
+        "campo": "data_venda",
+        "tipo": "DateTime",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Data e hora exata da emissão"
+      },
+      {
+        "campo": "id_cliente_aluno",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "FK",
+        "obrigatorio": "Não",
+        "descricao": "Opcional: vincula a Alunos para venda a prazo"
+      },
+      {
+        "campo": "valor_total",
+        "tipo": "Decimal (10,2)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Soma bruta dos itens deduzida de descontos"
+      },
+      {
+        "campo": "forma_pagamento",
+        "tipo": "Texto (20)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "DINHEIRO, PIX, CARTAO_DEB, CARTAO_CRED, PRAZO"
+      },
+      {
+        "campo": "status_venda",
+        "tipo": "Texto (15)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "FINALIZADA, CANCELADA, AGUARDANDO_PAGAMENTO"
+      }
+    ],
+    "ItensVenda": [
+      {
+        "campo": "id_item_venda",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "PK",
+        "obrigatorio": "Sim",
+        "descricao": "Identificador único do item do checkout"
+      },
+      {
+        "campo": "id_venda",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Vincula à tabela Vendas"
+      },
+      {
+        "campo": "id_item",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Vínculo com ProdutosServicos"
+      },
+      {
+        "campo": "quantidade",
+        "tipo": "Decimal (10,2)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Volume comercializado"
+      },
+      {
+        "campo": "preco_unitario",
+        "tipo": "Decimal (10,2)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Preço praticado no momento da venda"
+      }
+    ],
+    "Boletos": [
+      {
+        "campo": "id_boleto",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "PK",
+        "obrigatorio": "Sim",
+        "descricao": "Identificador único do título bancário"
+      },
+      {
+        "campo": "tipo_natureza",
+        "tipo": "Texto (10)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "PAGAR ou RECEBER"
+      },
+      {
+        "campo": "codigo_barras",
+        "tipo": "Texto (60)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Linha digitável / código FEBRABAN"
+      },
+      {
+        "campo": "valor_nominal",
+        "tipo": "Decimal (10,2)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Valor de face do título de cobrança"
+      },
+      {
+        "campo": "data_vencimento",
+        "tipo": "Data",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Data de expiração do título"
+      },
+      {
+        "campo": "status_boleto",
+        "tipo": "Texto (15)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "ABERTO, PAGO, VENCIDO, CANCELADO"
+      }
+    ],
+    "ContasPagarBar": [
+      {
+        "campo": "id_conta_pagar",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "PK",
+        "obrigatorio": "Sim",
+        "descricao": "Identificador do lançamento a pagar"
+      },
+      {
+        "campo": "descricao",
+        "tipo": "Texto (150)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Histórico do compromisso assumido"
+      },
+      {
+        "campo": "id_nota",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "FK",
+        "obrigatorio": "Não",
+        "descricao": "Opcional: vínculo direto com a Nota Fiscal"
+      },
+      {
+        "campo": "valor_devido",
+        "tipo": "Decimal (10,2)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Montante original da obrigação"
+      },
+      {
+        "campo": "data_vencimento",
+        "tipo": "Data",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Prazo final para liquidação"
+      },
+      {
+        "campo": "data_liquidacao",
+        "tipo": "Data",
+        "pk_fk": "",
+        "obrigatorio": "Não",
+        "descricao": "Data real de quitação bancária"
+      },
+      {
+        "campo": "status_card",
+        "tipo": "Texto (20)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "ABERTO, AGENDADO, VENCIDO, PAGO"
+      }
+    ],
+    "ContasReceberBar": [
+      {
+        "campo": "id_conta_receber",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "PK",
+        "obrigatorio": "Sim",
+        "descricao": "Identificador do crédito a receber"
+      },
+      {
+        "campo": "id_venda",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Vínculo com a venda a prazo originária"
+      },
+      {
+        "campo": "devedor_nome",
+        "tipo": "Texto (100)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Nome do cliente responsável pelo débito"
+      },
+      {
+        "campo": "valor_devido",
+        "tipo": "Decimal (10,2)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Saldo remanescente devedor"
+      },
+      {
+        "campo": "data_vencimento",
+        "tipo": "Data",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Data combinada para acerto"
+      },
+      {
+        "campo": "data_recebimento",
+        "tipo": "Data",
+        "pk_fk": "",
+        "obrigatorio": "Não",
+        "descricao": "Data em que o valor foi pago em caixa"
+      },
+      {
+        "campo": "status_card",
+        "tipo": "Texto (20)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "ABERTO, VENCIDO, PAGO"
+      }
+    ]
+  },
+  "aulasTables": {
+    "Planos": [
+      {
+        "campo": "id_plano",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "PK",
+        "obrigatorio": "Sim",
+        "descricao": "Identificador único do plano de aulas"
+      },
+      {
+        "campo": "nome_plano",
+        "tipo": "Texto (80)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Identificação (ex.: Mensal 2x Beach Tennis)"
+      },
+      {
+        "campo": "valor_mensalidade",
+        "tipo": "Decimal (10,2)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Preço base acordado para o plano"
+      },
+      {
+        "campo": "aulas_semana",
+        "tipo": "Inteiro",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Frequência de treinos permitida por semana"
+      },
+      {
+        "campo": "duracao_minutos",
+        "tipo": "Inteiro",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Tempo de duração de cada aula (ex.: 60)"
+      },
+      {
+        "campo": "status",
+        "tipo": "Booleano",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Ativo (1) ou Descontinuado (0)"
+      }
+    ],
+    "Professores": [
+      {
+        "campo": "id_professor",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "PK",
+        "obrigatorio": "Sim",
+        "descricao": "Identificador único do professor"
+      },
+      {
+        "campo": "nome_professor",
+        "tipo": "Texto (100)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Nome civil do instrutor"
+      },
+      {
+        "campo": "cpf_cnpj",
+        "tipo": "Texto (18)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Identificação fiscal do profissional"
+      },
+      {
+        "campo": "especialidade",
+        "tipo": "Texto (60)",
+        "pk_fk": "",
+        "obrigatorio": "Não",
+        "descricao": "Grau técnico (Iniciante, Competição, etc.)"
+      },
+      {
+        "campo": "comissao_padrao_pct",
+        "tipo": "Decimal (5,2)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Percentual base padrão de comissionamento"
+      },
+      {
+        "campo": "chave_pix",
+        "tipo": "Texto (100)",
+        "pk_fk": "",
+        "obrigatorio": "Não",
+        "descricao": "Chave bancária para repasses de proventos"
+      },
+      {
+        "campo": "telefone",
+        "tipo": "Texto (20)",
+        "pk_fk": "",
+        "obrigatorio": "Não",
+        "descricao": "Contato WhatsApp para agendamentos"
+      },
+      {
+        "campo": "status",
+        "tipo": "Booleano",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Instrutor em atividade (1) ou inativo (0)"
+      }
+    ],
+    "Alunos": [
+      {
+        "campo": "id_aluno",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "PK",
+        "obrigatorio": "Sim",
+        "descricao": "Identificador único da matrícula do aluno"
+      },
+      {
+        "campo": "nome_completo",
+        "tipo": "Texto (120)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Nome completo do atleta associado"
+      },
+      {
+        "campo": "cpf",
+        "tipo": "Texto (14)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Cadastro de Pessoa Física do aluno"
+      },
+      {
+        "campo": "telefone",
+        "tipo": "Texto (20)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Telefone móvel de contato"
+      },
+      {
+        "campo": "id_plano",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Vincula à tabela Planos"
+      },
+      {
+        "campo": "id_professor_titular",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Vínculo com o instrutor designado"
+      },
+      {
+        "campo": "dia_vencimento",
+        "tipo": "Inteiro",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Dia do mês de corte para pagamento (1 a 31)"
+      },
+      {
+        "campo": "status_matricula",
+        "tipo": "Texto (20)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "ATIVO, TRANCADO, INADIMPLENTE, INATIVO"
+      }
+    ],
+    "AulasContratos": [
+      {
+        "campo": "id_contrato_aula",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "PK",
+        "obrigatorio": "Sim",
+        "descricao": "Instância da relação contratual de aula"
+      },
+      {
+        "campo": "id_aluno",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Vincula à tabela Alunos"
+      },
+      {
+        "campo": "id_professor",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Vincula à tabela Professores"
+      },
+      {
+        "campo": "id_plano",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Vincula à tabela Planos"
+      },
+      {
+        "campo": "comissao_especifica_pct",
+        "tipo": "Decimal (5,2)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Percentual acordado para este aluno específico"
+      },
+      {
+        "campo": "data_inicio",
+        "tipo": "Data",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Data de vigência do contrato pedagógico"
+      }
+    ],
+    "ParcelasAluno": [
+      {
+        "campo": "id_parcela",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "PK",
+        "obrigatorio": "Sim",
+        "descricao": "Identificador individual da mensalidade"
+      },
+      {
+        "campo": "id_contrato_aula",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Vincula à tabela AulasContratos"
+      },
+      {
+        "campo": "numero_parcela",
+        "tipo": "Inteiro",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Ordinal da mensalidade no ciclo (ex.: 1/12)"
+      },
+      {
+        "campo": "valor_parcela",
+        "tipo": "Decimal (10,2)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Montante devido líquido do período"
+      },
+      {
+        "campo": "data_vencimento",
+        "tipo": "Data",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Data limite para pagamento sem encargos"
+      },
+      {
+        "campo": "status_parcela",
+        "tipo": "Texto (20)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "ABERTA, PAGA, VENCIDA, ISENTA"
+      }
+    ],
+    "Comissoes": [
+      {
+        "campo": "id_comissao",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "PK",
+        "obrigatorio": "Sim",
+        "descricao": "Identificador do crédito ao professor"
+      },
+      {
+        "campo": "id_professor",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Instrutor beneficiário"
+      },
+      {
+        "campo": "id_parcela",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Mensalidade do aluno que originou o direito"
+      },
+      {
+        "campo": "valor_base",
+        "tipo": "Decimal (10,2)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Valor base recebido da mensalidade"
+      },
+      {
+        "campo": "valor_comissao",
+        "tipo": "Decimal (10,2)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Valor líquido devido apurado (Base x % Docente)"
+      },
+      {
+        "campo": "status_repasse",
+        "tipo": "Texto (20)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "PROVISIONADA, LIBERADA, PAGA"
+      }
+    ],
+    "Eventos": [
+      {
+        "campo": "id_evento",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "PK",
+        "obrigatorio": "Sim",
+        "descricao": "Identificador do torneio ou clínica técnica"
+      },
+      {
+        "campo": "nome_evento",
+        "tipo": "Texto (100)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Identificação pública da competição"
+      },
+      {
+        "campo": "data_evento",
+        "tipo": "DateTime",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Data e horário do início da programação"
+      },
+      {
+        "campo": "local_quadras",
+        "tipo": "Texto (80)",
+        "pk_fk": "",
+        "obrigatorio": "Não",
+        "descricao": "Indicação das quadras reservadas"
+      },
+      {
+        "campo": "valor_inscricao",
+        "tipo": "Decimal (10,2)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Taxa de participação por atleta/dupla"
+      },
+      {
+        "campo": "status_evento",
+        "tipo": "Texto (20)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "ABERTO, LOTADO, EM_ANDAMENTO, FINALIZADO"
+      }
+    ],
+    "InscricoesEvento": [
+      {
+        "campo": "id_inscricao",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "PK",
+        "obrigatorio": "Sim",
+        "descricao": "Identificador único da vaga preenchida"
+      },
+      {
+        "campo": "id_evento",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Vincula à tabela Eventos"
+      },
+      {
+        "campo": "id_aluno",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "FK",
+        "obrigatorio": "Não",
+        "descricao": "Opcional: vínculo a aluno já matriculado"
+      },
+      {
+        "campo": "nome_participante_avulso",
+        "tipo": "Texto (120)",
+        "pk_fk": "",
+        "obrigatorio": "Não",
+        "descricao": "Preenchido em caso de competidor externo"
+      },
+      {
+        "campo": "status_pagamento",
+        "tipo": "Texto (20)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "PENDENTE, CONFIRMADO, ISENTO"
+      }
+    ],
+    "PagamentosAssociacao": [
+      {
+        "campo": "id_pagamento_ass",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "PK",
+        "obrigatorio": "Sim",
+        "descricao": "Identificador da despesa da entidade"
+      },
+      {
+        "campo": "categoria_fixa",
+        "tipo": "Texto (30)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Luz, Água, Telefone, TLL, IPTU, Internet, Professores, Marketing, Diretoria, Contabilidade, Aluguel"
+      },
+      {
+        "campo": "descricao",
+        "tipo": "Texto (150)",
+        "pk_fk": "",
+        "obrigatorio": "Não",
+        "descricao": "Discriminação do gasto ou fornecedor"
+      },
+      {
+        "campo": "valor_compromisso",
+        "tipo": "Decimal (10,2)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Valor a liquidar"
+      },
+      {
+        "campo": "data_vencimento",
+        "tipo": "Data",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Prazo final para quitação da obrigação"
+      },
+      {
+        "campo": "data_liquidacao",
+        "tipo": "Data",
+        "pk_fk": "",
+        "obrigatorio": "Não",
+        "descricao": "Data da baixa do caixa da Associação"
+      },
+      {
+        "campo": "status_card",
+        "tipo": "Texto (20)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "A_VENCER, VENCENDO, VENCIDO, PAGO"
+      }
+    ],
+    "AvisosRecebimentos": [
+      {
+        "campo": "id_aviso",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "PK",
+        "obrigatorio": "Sim",
+        "descricao": "Identificador da mensagem de cobrança gerada"
+      },
+      {
+        "campo": "id_parcela",
+        "tipo": "UUID / Inteiro",
+        "pk_fk": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Vincula à tabela ParcelasAluno"
+      },
+      {
+        "campo": "mensagem_texto",
+        "tipo": "Texto (255)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Conteúdo descritivo do status do recebimento"
+      },
+      {
+        "campo": "prioridade",
+        "tipo": "Texto (10)",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "BAIXA, MEDIA, URGENTE (inadimplência)"
+      },
+      {
+        "campo": "lido",
+        "tipo": "Booleano",
+        "pk_fk": "",
+        "obrigatorio": "Sim",
+        "descricao": "Controle de visualização pelo gestor"
+      }
+    ]
+  },
+  "relacionamentos": [
+    {
+      "de_tabela": "ProdutosServicos",
+      "de_campo": "id_categoria",
+      "para_tabela": "CategoriasBar",
+      "para_campo": "id_categoria",
+      "tipo_relacao": "N para 1",
+      "descricao": "Cada produto/serviço pertence a uma categoria"
+    },
+    {
+      "de_tabela": "MovimentacoesEstoque",
+      "de_campo": "id_item",
+      "para_tabela": "ProdutosServicos",
+      "para_campo": "id_item",
+      "tipo_relacao": "N para 1",
+      "descricao": "Cada movimentação refere-se a um item"
+    },
+    {
+      "de_tabela": "ItensNota",
+      "de_campo": "id_nota",
+      "para_tabela": "NotasFiscais",
+      "para_campo": "id_nota",
+      "tipo_relacao": "N para 1",
+      "descricao": "Itens pertencem a uma nota fiscal"
+    },
+    {
+      "de_tabela": "ItensNota",
+      "de_campo": "id_item",
+      "para_tabela": "ProdutosServicos",
+      "para_campo": "id_item",
+      "tipo_relacao": "N para 1",
+      "descricao": "Item da nota vincula-se ao catálogo"
+    },
+    {
+      "de_tabela": "ItensVenda",
+      "de_campo": "id_venda",
+      "para_tabela": "Vendas",
+      "para_campo": "id_venda",
+      "tipo_relacao": "N para 1",
+      "descricao": "Itens pertencem a uma venda"
+    },
+    {
+      "de_tabela": "ItensVenda",
+      "de_campo": "id_item",
+      "para_tabela": "ProdutosServicos",
+      "para_campo": "id_item",
+      "tipo_relacao": "N para 1",
+      "descricao": "Item vendido vincula-se ao catálogo"
+    },
+    {
+      "de_tabela": "Vendas",
+      "de_campo": "id_cliente_aluno",
+      "para_tabela": "Alunos",
+      "para_campo": "id_aluno",
+      "tipo_relacao": "N para 1",
+      "descricao": "Venda a prazo vincula-se a um aluno (opcional)"
+    },
+    {
+      "de_tabela": "ContasPagarBar",
+      "de_campo": "id_nota",
+      "para_tabela": "NotasFiscais",
+      "para_campo": "id_nota",
+      "tipo_relacao": "N para 1",
+      "descricao": "Conta a pagar pode originar-se de uma nota"
+    },
+    {
+      "de_tabela": "ContasReceberBar",
+      "de_campo": "id_venda",
+      "para_tabela": "Vendas",
+      "para_campo": "id_venda",
+      "tipo_relacao": "N para 1",
+      "descricao": "Conta a receber origina-se de venda a prazo"
+    },
+    {
+      "de_tabela": "Alunos",
+      "de_campo": "id_plano",
+      "para_tabela": "Planos",
+      "para_campo": "id_plano",
+      "tipo_relacao": "N para 1",
+      "descricao": "Aluno contrata um plano"
+    },
+    {
+      "de_tabela": "Alunos",
+      "de_campo": "id_professor_titular",
+      "para_tabela": "Professores",
+      "para_campo": "id_professor",
+      "tipo_relacao": "N para 1",
+      "descricao": "Aluno tem um professor titular"
+    },
+    {
+      "de_tabela": "AulasContratos",
+      "de_campo": "id_aluno",
+      "para_tabela": "Alunos",
+      "para_campo": "id_aluno",
+      "tipo_relacao": "N para 1",
+      "descricao": "Contrato refere-se a um aluno"
+    },
+    {
+      "de_tabela": "AulasContratos",
+      "de_campo": "id_professor",
+      "para_tabela": "Professores",
+      "para_campo": "id_professor",
+      "tipo_relacao": "N para 1",
+      "descricao": "Contrato refere-se a um professor"
+    },
+    {
+      "de_tabela": "AulasContratos",
+      "de_campo": "id_plano",
+      "para_tabela": "Planos",
+      "para_campo": "id_plano",
+      "tipo_relacao": "N para 1",
+      "descricao": "Contrato refere-se a um plano"
+    },
+    {
+      "de_tabela": "ParcelasAluno",
+      "de_campo": "id_contrato_aula",
+      "para_tabela": "AulasContratos",
+      "para_campo": "id_contrato_aula",
+      "tipo_relacao": "N para 1",
+      "descricao": "Parcelas pertencem a um contrato de aula"
+    },
+    {
+      "de_tabela": "Comissoes",
+      "de_campo": "id_professor",
+      "para_tabela": "Professores",
+      "para_campo": "id_professor",
+      "tipo_relacao": "N para 1",
+      "descricao": "Comissão é creditada a um professor"
+    },
+    {
+      "de_tabela": "Comissoes",
+      "de_campo": "id_parcela",
+      "para_tabela": "ParcelasAluno",
+      "para_campo": "id_parcela",
+      "tipo_relacao": "N para 1",
+      "descricao": "Comissão origina-se de uma parcela paga"
+    },
+    {
+      "de_tabela": "InscricoesEvento",
+      "de_campo": "id_evento",
+      "para_tabela": "Eventos",
+      "para_campo": "id_evento",
+      "tipo_relacao": "N para 1",
+      "descricao": "Inscrição pertence a um evento"
+    },
+    {
+      "de_tabela": "InscricoesEvento",
+      "de_campo": "id_aluno",
+      "para_tabela": "Alunos",
+      "para_campo": "id_aluno",
+      "tipo_relacao": "N para 1",
+      "descricao": "Inscrição pode vincular-se a um aluno"
+    },
+    {
+      "de_tabela": "AvisosRecebimentos",
+      "de_campo": "id_parcela",
+      "para_tabela": "ParcelasAluno",
+      "para_campo": "id_parcela",
+      "tipo_relacao": "N para 1",
+      "descricao": "Aviso refere-se a uma parcela"
+    }
+  ],
+  "valoresEnumerados": [
+    {
+      "tabela": "ProdutosServicos",
+      "campo": "tipo",
+      "valores": [
+        "PRODUTO",
+        "SERVICO"
+      ],
+      "observacao": "Produto controla estoque; serviço não"
+    },
+    {
+      "tabela": "ProdutosServicos",
+      "campo": "unidade_medida",
+      "valores": [
+        "UN",
+        "KG",
+        "LT",
+        "DOSE"
+      ],
+      "observacao": "Unidades de medida padrão"
+    },
+    {
+      "tabela": "MovimentacoesEstoque",
+      "campo": "tipo_movimento",
+      "valores": [
+        "ENTRADA",
+        "SAIDA",
+        "AJUSTE"
+      ],
+      "observacao": "ENTRADA vem de nota; SAIDA vem de venda"
+    },
+    {
+      "tabela": "Vendas",
+      "campo": "forma_pagamento",
+      "valores": [
+        "DINHEIRO",
+        "PIX",
+        "CARTAO_DEB",
+        "CARTAO_CRED",
+        "PRAZO"
+      ],
+      "observacao": "PRAZO gera conta a receber automaticamente"
+    },
+    {
+      "tabela": "Vendas",
+      "campo": "status_venda",
+      "valores": [
+        "FINALIZADA",
+        "CANCELADA",
+        "AGUARDANDO_PAGAMENTO"
+      ],
+      "observacao": "Status do cupom"
+    },
+    {
+      "tabela": "Boletos",
+      "campo": "tipo_natureza",
+      "valores": [
+        "PAGAR",
+        "RECEBER"
+      ],
+      "observacao": "Direção do título"
+    },
+    {
+      "tabela": "Boletos",
+      "campo": "status_boleto",
+      "valores": [
+        "ABERTO",
+        "PAGO",
+        "VENCIDO",
+        "CANCELADO"
+      ],
+      "observacao": "Situação do boleto"
+    },
+    {
+      "tabela": "ContasPagarBar",
+      "campo": "status_card",
+      "valores": [
+        "ABERTO",
+        "AGENDADO",
+        "VENCIDO",
+        "PAGO"
+      ],
+      "observacao": "Controla a coluna do card no kanban"
+    },
+    {
+      "tabela": "ContasReceberBar",
+      "campo": "status_card",
+      "valores": [
+        "ABERTO",
+        "VENCIDO",
+        "PAGO"
+      ],
+      "observacao": "Controla a coluna do card no kanban"
+    },
+    {
+      "tabela": "Alunos",
+      "campo": "status_matricula",
+      "valores": [
+        "ATIVO",
+        "TRANCADO",
+        "INADIMPLENTE",
+        "INATIVO"
+      ],
+      "observacao": "Situação do aluno"
+    },
+    {
+      "tabela": "ParcelasAluno",
+      "campo": "status_parcela",
+      "valores": [
+        "ABERTA",
+        "PAGA",
+        "VENCIDA",
+        "ISENTA"
+      ],
+      "observacao": "Situação da mensalidade"
+    },
+    {
+      "tabela": "Comissoes",
+      "campo": "status_repasse",
+      "valores": [
+        "PROVISIONADA",
+        "LIBERADA",
+        "PAGA"
+      ],
+      "observacao": "LIBERADA só após mensalidade PAGA"
+    },
+    {
+      "tabela": "Eventos",
+      "campo": "status_evento",
+      "valores": [
+        "ABERTO",
+        "LOTADO",
+        "EM_ANDAMENTO",
+        "FINALIZADO"
+      ],
+      "observacao": "Situação do evento"
+    },
+    {
+      "tabela": "InscricoesEvento",
+      "campo": "status_pagamento",
+      "valores": [
+        "PENDENTE",
+        "CONFIRMADO",
+        "ISENTO"
+      ],
+      "observacao": "Pagamento da inscrição"
+    },
+    {
+      "tabela": "PagamentosAssociacao",
+      "campo": "categoria_fixa",
+      "valores": [
+        "Luz",
+        "Água",
+        "Telefone",
+        "TLL",
+        "IPTU",
+        "Internet",
+        "Professores",
+        "Marketing",
+        "Diretoria",
+        "Contabilidade",
+        "Aluguel"
+      ],
+      "observacao": "Categorias fixas de despesas da Associação"
+    },
+    {
+      "tabela": "PagamentosAssociacao",
+      "campo": "status_card",
+      "valores": [
+        "A_VENCER",
+        "VENCENDO",
+        "VENCIDO",
+        "PAGO"
+      ],
+      "observacao": "Controla a coluna do card no kanban"
+    },
+    {
+      "tabela": "AvisosRecebimentos",
+      "campo": "prioridade",
+      "valores": [
+        "BAIXA",
+        "MEDIA",
+        "URGENTE"
+      ],
+      "observacao": "URGENTE = parcela vencida"
+    }
+  ]
+}

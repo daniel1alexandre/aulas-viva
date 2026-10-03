@@ -1,0 +1,1403 @@
+{
+  "Instruções": [
+    [
+      "Modelo de Dados — App de Gestão Viva By Baumann (BAR e AULAS)"
+    ],
+    [
+      "Guia de criação das tabelas no Antigravity"
+    ],
+    [],
+    [
+      "Como usar",
+      "Crie cada tabela listada nas abas Tabelas_BAR e Tabelas_AULAS, com os campos indicados. Use a aba Relacionamentos para ligar as tabelas (chaves estrangeiras) e a aba Valores_Enumerados para preencher os campos de seleção (dropdowns)."
+    ],
+    [
+      "Legenda de tipos de dado"
+    ],
+    [
+      "Texto (N)",
+      "campo de texto com limite de N caracteres"
+    ],
+    [
+      "Decimal (N,M)",
+      "número com casas decimais (ex.: Decimal (10,2) = valor monetário)"
+    ],
+    [
+      "Inteiro",
+      "número inteiro"
+    ],
+    [
+      "Data",
+      "campo de data"
+    ],
+    [
+      "DateTime",
+      "data e hora"
+    ],
+    [
+      "Booleano",
+      "sim/não (verdadeiro/falso)"
+    ],
+    [
+      "UUID / Inteiro",
+      "identificador único (chave primária)"
+    ],
+    [
+      "Convenções"
+    ],
+    [
+      "PK",
+      "Chave Primária (identificador único do registro)"
+    ],
+    [
+      "FK",
+      "Chave Estrangeira (liga o registro a outra tabela)"
+    ],
+    [
+      "Obrigatório",
+      "campo que não pode ficar vazio"
+    ],
+    [],
+    [
+      "Dica Antigravity",
+      "Nas telas de cards (kanban), o campo status_card controla a coluna onde o card aparece. Os valores devem ser exatamente os indicados na aba Valores_Enumerados."
+    ],
+    [],
+    [],
+    [
+      "Resumo do modelo (cálculo automático)"
+    ],
+    [
+      "Total de campos em Tabelas_BAR",
+      0
+    ],
+    [
+      "Total de campos em Tabelas_AULAS",
+      0
+    ],
+    [
+      "Total de relacionamentos",
+      0
+    ],
+    [
+      "Total de valores enumerados",
+      0
+    ]
+  ],
+  "Tabelas_BAR": [
+    [
+      "Tabela",
+      "Campo",
+      "Tipo de Dado",
+      "PK/FK",
+      "Obrigatório",
+      "Descrição / Finalidade"
+    ],
+    [
+      "CategoriasBar",
+      "id_categoria",
+      "UUID / Inteiro",
+      "PK",
+      "Sim",
+      "Identificador único da categoria"
+    ],
+    [
+      "CategoriasBar",
+      "nome_categoria",
+      "Texto (60)",
+      "",
+      "Sim",
+      "Nome da categoria (ex.: Bebidas, Porções)"
+    ],
+    [
+      "CategoriasBar",
+      "tipo_aplicacao",
+      "Texto (20)",
+      "",
+      "Sim",
+      "Identifica se a categoria é de Produto ou Serviço"
+    ],
+    [
+      "CategoriasBar",
+      "status",
+      "Booleano",
+      "",
+      "Sim",
+      "Ativo (1) ou Inativo (0)"
+    ],
+    [
+      "ProdutosServicos",
+      "id_item",
+      "UUID / Inteiro",
+      "PK",
+      "Sim",
+      "Identificador único do produto ou serviço"
+    ],
+    [
+      "ProdutosServicos",
+      "nome_item",
+      "Texto (120)",
+      "",
+      "Sim",
+      "Descrição comercial do item"
+    ],
+    [
+      "ProdutosServicos",
+      "tipo",
+      "Texto (15)",
+      "",
+      "Sim",
+      "Diferencia 'PRODUTO' ou 'SERVICO'"
+    ],
+    [
+      "ProdutosServicos",
+      "id_categoria",
+      "UUID / Inteiro",
+      "FK",
+      "Sim",
+      "Vincula à tabela CategoriasBar"
+    ],
+    [
+      "ProdutosServicos",
+      "unidade_medida",
+      "Texto (10)",
+      "",
+      "Sim",
+      "Unidade de medida (UN, KG, LT, DOSE)"
+    ],
+    [
+      "ProdutosServicos",
+      "preco_custo",
+      "Decimal (10,2)",
+      "",
+      "Sim",
+      "Valor de custo médio unitário"
+    ],
+    [
+      "ProdutosServicos",
+      "preco_venda",
+      "Decimal (10,2)",
+      "",
+      "Sim",
+      "Valor de venda praticado no PDV"
+    ],
+    [
+      "ProdutosServicos",
+      "estoque_minimo",
+      "Decimal (10,2)",
+      "",
+      "Sim",
+      "Nível de corte para alerta de reposição"
+    ],
+    [
+      "ProdutosServicos",
+      "estoque_atual",
+      "Decimal (10,2)",
+      "",
+      "Sim",
+      "Saldo físico atual no bar"
+    ],
+    [
+      "ProdutosServicos",
+      "codigo_barras",
+      "Texto (30)",
+      "",
+      "Não",
+      "EAN/GTIN ou código interno para leitor"
+    ],
+    [
+      "MovimentacoesEstoque",
+      "id_movimento",
+      "UUID / Inteiro",
+      "PK",
+      "Sim",
+      "Identificador da movimentação física"
+    ],
+    [
+      "MovimentacoesEstoque",
+      "id_item",
+      "UUID / Inteiro",
+      "FK",
+      "Sim",
+      "Vincula à tabela ProdutosServicos"
+    ],
+    [
+      "MovimentacoesEstoque",
+      "tipo_movimento",
+      "Texto (15)",
+      "",
+      "Sim",
+      "ENTRADA (Nota), SAIDA (Venda), AJUSTE (Perda)"
+    ],
+    [
+      "MovimentacoesEstoque",
+      "quantidade",
+      "Decimal (10,2)",
+      "",
+      "Sim",
+      "Volume movimentado"
+    ],
+    [
+      "MovimentacoesEstoque",
+      "data_hora",
+      "DateTime",
+      "",
+      "Sim",
+      "Carimbo cronológico do evento"
+    ],
+    [
+      "MovimentacoesEstoque",
+      "documento_origem",
+      "Texto (50)",
+      "",
+      "Não",
+      "Número da NF ou ID da Venda geradora"
+    ],
+    [
+      "NotasFiscais",
+      "id_nota",
+      "UUID / Inteiro",
+      "PK",
+      "Sim",
+      "Identificador interno da nota recebida"
+    ],
+    [
+      "NotasFiscais",
+      "numero_nf",
+      "Texto (30)",
+      "",
+      "Sim",
+      "Número oficial da NF-e"
+    ],
+    [
+      "NotasFiscais",
+      "chave_acesso",
+      "Texto (44)",
+      "",
+      "Sim",
+      "Chave de acesso da SEFAZ"
+    ],
+    [
+      "NotasFiscais",
+      "fornecedor_nome",
+      "Texto (120)",
+      "",
+      "Sim",
+      "Razão Social ou Nome Fantasia"
+    ],
+    [
+      "NotasFiscais",
+      "fornecedor_cnpj",
+      "Texto (18)",
+      "",
+      "Sim",
+      "Cadastro Nacional de Pessoa Jurídica"
+    ],
+    [
+      "NotasFiscais",
+      "valor_total_nf",
+      "Decimal (12,2)",
+      "",
+      "Sim",
+      "Montante bruto contábil da nota fiscal"
+    ],
+    [
+      "ItensNota",
+      "id_item_nota",
+      "UUID / Inteiro",
+      "PK",
+      "Sim",
+      "Identificador do item constante na nota"
+    ],
+    [
+      "ItensNota",
+      "id_nota",
+      "UUID / Inteiro",
+      "FK",
+      "Sim",
+      "Vincula à tabela NotasFiscais"
+    ],
+    [
+      "ItensNota",
+      "id_item",
+      "UUID / Inteiro",
+      "FK",
+      "Sim",
+      "Vínculo com o catálogo de ProdutosServicos"
+    ],
+    [
+      "ItensNota",
+      "ncm",
+      "Texto (8)",
+      "",
+      "Sim",
+      "Nomenclatura Comum do Mercosul (8 dígitos)"
+    ],
+    [
+      "ItensNota",
+      "cest",
+      "Texto (7)",
+      "",
+      "Sim",
+      "Código Especificador de Substituição Tributária (7 dígitos)"
+    ],
+    [
+      "ItensNota",
+      "quantidade",
+      "Decimal (10,2)",
+      "",
+      "Sim",
+      "Quantidade faturada pelo fornecedor"
+    ],
+    [
+      "ItensNota",
+      "valor_unitario",
+      "Decimal (10,2)",
+      "",
+      "Sim",
+      "Custo unitário faturado do item"
+    ],
+    [
+      "Vendas",
+      "id_venda",
+      "UUID / Inteiro",
+      "PK",
+      "Sim",
+      "Identificador único do cupom/comanda"
+    ],
+    [
+      "Vendas",
+      "data_venda",
+      "DateTime",
+      "",
+      "Sim",
+      "Data e hora exata da emissão"
+    ],
+    [
+      "Vendas",
+      "id_cliente_aluno",
+      "UUID / Inteiro",
+      "FK",
+      "Não",
+      "Opcional: vincula a Alunos para venda a prazo"
+    ],
+    [
+      "Vendas",
+      "valor_total",
+      "Decimal (10,2)",
+      "",
+      "Sim",
+      "Soma bruta dos itens deduzida de descontos"
+    ],
+    [
+      "Vendas",
+      "forma_pagamento",
+      "Texto (20)",
+      "",
+      "Sim",
+      "DINHEIRO, PIX, CARTAO_DEB, CARTAO_CRED, PRAZO"
+    ],
+    [
+      "Vendas",
+      "status_venda",
+      "Texto (15)",
+      "",
+      "Sim",
+      "FINALIZADA, CANCELADA, AGUARDANDO_PAGAMENTO"
+    ],
+    [
+      "ItensVenda",
+      "id_item_venda",
+      "UUID / Inteiro",
+      "PK",
+      "Sim",
+      "Identificador único do item do checkout"
+    ],
+    [
+      "ItensVenda",
+      "id_venda",
+      "UUID / Inteiro",
+      "FK",
+      "Sim",
+      "Vincula à tabela Vendas"
+    ],
+    [
+      "ItensVenda",
+      "id_item",
+      "UUID / Inteiro",
+      "FK",
+      "Sim",
+      "Vínculo com ProdutosServicos"
+    ],
+    [
+      "ItensVenda",
+      "quantidade",
+      "Decimal (10,2)",
+      "",
+      "Sim",
+      "Volume comercializado"
+    ],
+    [
+      "ItensVenda",
+      "preco_unitario",
+      "Decimal (10,2)",
+      "",
+      "Sim",
+      "Preço praticado no momento da venda"
+    ],
+    [
+      "Boletos",
+      "id_boleto",
+      "UUID / Inteiro",
+      "PK",
+      "Sim",
+      "Identificador único do título bancário"
+    ],
+    [
+      "Boletos",
+      "tipo_natureza",
+      "Texto (10)",
+      "",
+      "Sim",
+      "PAGAR ou RECEBER"
+    ],
+    [
+      "Boletos",
+      "codigo_barras",
+      "Texto (60)",
+      "",
+      "Sim",
+      "Linha digitável / código FEBRABAN"
+    ],
+    [
+      "Boletos",
+      "valor_nominal",
+      "Decimal (10,2)",
+      "",
+      "Sim",
+      "Valor de face do título de cobrança"
+    ],
+    [
+      "Boletos",
+      "data_vencimento",
+      "Data",
+      "",
+      "Sim",
+      "Data de expiração do título"
+    ],
+    [
+      "Boletos",
+      "status_boleto",
+      "Texto (15)",
+      "",
+      "Sim",
+      "ABERTO, PAGO, VENCIDO, CANCELADO"
+    ],
+    [
+      "ContasPagarBar",
+      "id_conta_pagar",
+      "UUID / Inteiro",
+      "PK",
+      "Sim",
+      "Identificador do lançamento a pagar"
+    ],
+    [
+      "ContasPagarBar",
+      "descricao",
+      "Texto (150)",
+      "",
+      "Sim",
+      "Histórico do compromisso assumido"
+    ],
+    [
+      "ContasPagarBar",
+      "id_nota",
+      "UUID / Inteiro",
+      "FK",
+      "Não",
+      "Opcional: vínculo direto com a Nota Fiscal"
+    ],
+    [
+      "ContasPagarBar",
+      "valor_devido",
+      "Decimal (10,2)",
+      "",
+      "Sim",
+      "Montante original da obrigação"
+    ],
+    [
+      "ContasPagarBar",
+      "data_vencimento",
+      "Data",
+      "",
+      "Sim",
+      "Prazo final para liquidação"
+    ],
+    [
+      "ContasPagarBar",
+      "data_liquidacao",
+      "Data",
+      "",
+      "Não",
+      "Data real de quitação bancária"
+    ],
+    [
+      "ContasPagarBar",
+      "status_card",
+      "Texto (20)",
+      "",
+      "Sim",
+      "ABERTO, AGENDADO, VENCIDO, PAGO"
+    ],
+    [
+      "ContasReceberBar",
+      "id_conta_receber",
+      "UUID / Inteiro",
+      "PK",
+      "Sim",
+      "Identificador do crédito a receber"
+    ],
+    [
+      "ContasReceberBar",
+      "id_venda",
+      "UUID / Inteiro",
+      "FK",
+      "Sim",
+      "Vínculo com a venda a prazo originária"
+    ],
+    [
+      "ContasReceberBar",
+      "devedor_nome",
+      "Texto (100)",
+      "",
+      "Sim",
+      "Nome do cliente responsável pelo débito"
+    ],
+    [
+      "ContasReceberBar",
+      "valor_devido",
+      "Decimal (10,2)",
+      "",
+      "Sim",
+      "Saldo remanescente devedor"
+    ],
+    [
+      "ContasReceberBar",
+      "data_vencimento",
+      "Data",
+      "",
+      "Sim",
+      "Data combinada para acerto"
+    ],
+    [
+      "ContasReceberBar",
+      "data_recebimento",
+      "Data",
+      "",
+      "Não",
+      "Data em que o valor foi pago em caixa"
+    ],
+    [
+      "ContasReceberBar",
+      "status_card",
+      "Texto (20)",
+      "",
+      "Sim",
+      "ABERTO, VENCIDO, PAGO"
+    ]
+  ],
+  "Tabelas_AULAS": [
+    [
+      "Tabela",
+      "Campo",
+      "Tipo de Dado",
+      "PK/FK",
+      "Obrigatório",
+      "Descrição / Finalidade"
+    ],
+    [
+      "Planos",
+      "id_plano",
+      "UUID / Inteiro",
+      "PK",
+      "Sim",
+      "Identificador único do plano de aulas"
+    ],
+    [
+      "Planos",
+      "nome_plano",
+      "Texto (80)",
+      "",
+      "Sim",
+      "Identificação (ex.: Mensal 2x Beach Tennis)"
+    ],
+    [
+      "Planos",
+      "valor_mensalidade",
+      "Decimal (10,2)",
+      "",
+      "Sim",
+      "Preço base acordado para o plano"
+    ],
+    [
+      "Planos",
+      "aulas_semana",
+      "Inteiro",
+      "",
+      "Sim",
+      "Frequência de treinos permitida por semana"
+    ],
+    [
+      "Planos",
+      "duracao_minutos",
+      "Inteiro",
+      "",
+      "Sim",
+      "Tempo de duração de cada aula (ex.: 60)"
+    ],
+    [
+      "Planos",
+      "status",
+      "Booleano",
+      "",
+      "Sim",
+      "Ativo (1) ou Descontinuado (0)"
+    ],
+    [
+      "Professores",
+      "id_professor",
+      "UUID / Inteiro",
+      "PK",
+      "Sim",
+      "Identificador único do professor"
+    ],
+    [
+      "Professores",
+      "nome_professor",
+      "Texto (100)",
+      "",
+      "Sim",
+      "Nome civil do instrutor"
+    ],
+    [
+      "Professores",
+      "cpf_cnpj",
+      "Texto (18)",
+      "",
+      "Sim",
+      "Identificação fiscal do profissional"
+    ],
+    [
+      "Professores",
+      "especialidade",
+      "Texto (60)",
+      "",
+      "Não",
+      "Grau técnico (Iniciante, Competição, etc.)"
+    ],
+    [
+      "Professores",
+      "comissao_padrao_pct",
+      "Decimal (5,2)",
+      "",
+      "Sim",
+      "Percentual base padrão de comissionamento"
+    ],
+    [
+      "Professores",
+      "chave_pix",
+      "Texto (100)",
+      "",
+      "Não",
+      "Chave bancária para repasses de proventos"
+    ],
+    [
+      "Professores",
+      "telefone",
+      "Texto (20)",
+      "",
+      "Não",
+      "Contato WhatsApp para agendamentos"
+    ],
+    [
+      "Professores",
+      "status",
+      "Booleano",
+      "",
+      "Sim",
+      "Instrutor em atividade (1) ou inativo (0)"
+    ],
+    [
+      "Alunos",
+      "id_aluno",
+      "UUID / Inteiro",
+      "PK",
+      "Sim",
+      "Identificador único da matrícula do aluno"
+    ],
+    [
+      "Alunos",
+      "nome_completo",
+      "Texto (120)",
+      "",
+      "Sim",
+      "Nome completo do atleta associado"
+    ],
+    [
+      "Alunos",
+      "cpf",
+      "Texto (14)",
+      "",
+      "Sim",
+      "Cadastro de Pessoa Física do aluno"
+    ],
+    [
+      "Alunos",
+      "telefone",
+      "Texto (20)",
+      "",
+      "Sim",
+      "Telefone móvel de contato"
+    ],
+    [
+      "Alunos",
+      "id_plano",
+      "UUID / Inteiro",
+      "FK",
+      "Sim",
+      "Vincula à tabela Planos"
+    ],
+    [
+      "Alunos",
+      "id_professor_titular",
+      "UUID / Inteiro",
+      "FK",
+      "Sim",
+      "Vínculo com o instrutor designado"
+    ],
+    [
+      "Alunos",
+      "dia_vencimento",
+      "Inteiro",
+      "",
+      "Sim",
+      "Dia do mês de corte para pagamento (1 a 31)"
+    ],
+    [
+      "Alunos",
+      "status_matricula",
+      "Texto (20)",
+      "",
+      "Sim",
+      "ATIVO, TRANCADO, INADIMPLENTE, INATIVO"
+    ],
+    [
+      "AulasContratos",
+      "id_contrato_aula",
+      "UUID / Inteiro",
+      "PK",
+      "Sim",
+      "Instância da relação contratual de aula"
+    ],
+    [
+      "AulasContratos",
+      "id_aluno",
+      "UUID / Inteiro",
+      "FK",
+      "Sim",
+      "Vincula à tabela Alunos"
+    ],
+    [
+      "AulasContratos",
+      "id_professor",
+      "UUID / Inteiro",
+      "FK",
+      "Sim",
+      "Vincula à tabela Professores"
+    ],
+    [
+      "AulasContratos",
+      "id_plano",
+      "UUID / Inteiro",
+      "FK",
+      "Sim",
+      "Vincula à tabela Planos"
+    ],
+    [
+      "AulasContratos",
+      "comissao_especifica_pct",
+      "Decimal (5,2)",
+      "",
+      "Sim",
+      "Percentual acordado para este aluno específico"
+    ],
+    [
+      "AulasContratos",
+      "data_inicio",
+      "Data",
+      "",
+      "Sim",
+      "Data de vigência do contrato pedagógico"
+    ],
+    [
+      "ParcelasAluno",
+      "id_parcela",
+      "UUID / Inteiro",
+      "PK",
+      "Sim",
+      "Identificador individual da mensalidade"
+    ],
+    [
+      "ParcelasAluno",
+      "id_contrato_aula",
+      "UUID / Inteiro",
+      "FK",
+      "Sim",
+      "Vincula à tabela AulasContratos"
+    ],
+    [
+      "ParcelasAluno",
+      "numero_parcela",
+      "Inteiro",
+      "",
+      "Sim",
+      "Ordinal da mensalidade no ciclo (ex.: 1/12)"
+    ],
+    [
+      "ParcelasAluno",
+      "valor_parcela",
+      "Decimal (10,2)",
+      "",
+      "Sim",
+      "Montante devido líquido do período"
+    ],
+    [
+      "ParcelasAluno",
+      "data_vencimento",
+      "Data",
+      "",
+      "Sim",
+      "Data limite para pagamento sem encargos"
+    ],
+    [
+      "ParcelasAluno",
+      "status_parcela",
+      "Texto (20)",
+      "",
+      "Sim",
+      "ABERTA, PAGA, VENCIDA, ISENTA"
+    ],
+    [
+      "Comissoes",
+      "id_comissao",
+      "UUID / Inteiro",
+      "PK",
+      "Sim",
+      "Identificador do crédito ao professor"
+    ],
+    [
+      "Comissoes",
+      "id_professor",
+      "UUID / Inteiro",
+      "FK",
+      "Sim",
+      "Instrutor beneficiário"
+    ],
+    [
+      "Comissoes",
+      "id_parcela",
+      "UUID / Inteiro",
+      "FK",
+      "Sim",
+      "Mensalidade do aluno que originou o direito"
+    ],
+    [
+      "Comissoes",
+      "valor_base",
+      "Decimal (10,2)",
+      "",
+      "Sim",
+      "Valor base recebido da mensalidade"
+    ],
+    [
+      "Comissoes",
+      "valor_comissao",
+      "Decimal (10,2)",
+      "",
+      "Sim",
+      "Valor líquido devido apurado (Base x % Docente)"
+    ],
+    [
+      "Comissoes",
+      "status_repasse",
+      "Texto (20)",
+      "",
+      "Sim",
+      "PROVISIONADA, LIBERADA, PAGA"
+    ],
+    [
+      "Eventos",
+      "id_evento",
+      "UUID / Inteiro",
+      "PK",
+      "Sim",
+      "Identificador do torneio ou clínica técnica"
+    ],
+    [
+      "Eventos",
+      "nome_evento",
+      "Texto (100)",
+      "",
+      "Sim",
+      "Identificação pública da competição"
+    ],
+    [
+      "Eventos",
+      "data_evento",
+      "DateTime",
+      "",
+      "Sim",
+      "Data e horário do início da programação"
+    ],
+    [
+      "Eventos",
+      "local_quadras",
+      "Texto (80)",
+      "",
+      "Não",
+      "Indicação das quadras reservadas"
+    ],
+    [
+      "Eventos",
+      "valor_inscricao",
+      "Decimal (10,2)",
+      "",
+      "Sim",
+      "Taxa de participação por atleta/dupla"
+    ],
+    [
+      "Eventos",
+      "status_evento",
+      "Texto (20)",
+      "",
+      "Sim",
+      "ABERTO, LOTADO, EM_ANDAMENTO, FINALIZADO"
+    ],
+    [
+      "InscricoesEvento",
+      "id_inscricao",
+      "UUID / Inteiro",
+      "PK",
+      "Sim",
+      "Identificador único da vaga preenchida"
+    ],
+    [
+      "InscricoesEvento",
+      "id_evento",
+      "UUID / Inteiro",
+      "FK",
+      "Sim",
+      "Vincula à tabela Eventos"
+    ],
+    [
+      "InscricoesEvento",
+      "id_aluno",
+      "UUID / Inteiro",
+      "FK",
+      "Não",
+      "Opcional: vínculo a aluno já matriculado"
+    ],
+    [
+      "InscricoesEvento",
+      "nome_participante_avulso",
+      "Texto (120)",
+      "",
+      "Não",
+      "Preenchido em caso de competidor externo"
+    ],
+    [
+      "InscricoesEvento",
+      "status_pagamento",
+      "Texto (20)",
+      "",
+      "Sim",
+      "PENDENTE, CONFIRMADO, ISENTO"
+    ],
+    [
+      "PagamentosAssociacao",
+      "id_pagamento_ass",
+      "UUID / Inteiro",
+      "PK",
+      "Sim",
+      "Identificador da despesa da entidade"
+    ],
+    [
+      "PagamentosAssociacao",
+      "categoria_fixa",
+      "Texto (30)",
+      "",
+      "Sim",
+      "Luz, Água, Telefone, TLL, IPTU, Internet, Professores, Marketing, Diretoria, Contabilidade, Aluguel"
+    ],
+    [
+      "PagamentosAssociacao",
+      "descricao",
+      "Texto (150)",
+      "",
+      "Não",
+      "Discriminação do gasto ou fornecedor"
+    ],
+    [
+      "PagamentosAssociacao",
+      "valor_compromisso",
+      "Decimal (10,2)",
+      "",
+      "Sim",
+      "Valor a liquidar"
+    ],
+    [
+      "PagamentosAssociacao",
+      "data_vencimento",
+      "Data",
+      "",
+      "Sim",
+      "Prazo final para quitação da obrigação"
+    ],
+    [
+      "PagamentosAssociacao",
+      "data_liquidacao",
+      "Data",
+      "",
+      "Não",
+      "Data da baixa do caixa da Associação"
+    ],
+    [
+      "PagamentosAssociacao",
+      "status_card",
+      "Texto (20)",
+      "",
+      "Sim",
+      "A_VENCER, VENCENDO, VENCIDO, PAGO"
+    ],
+    [
+      "AvisosRecebimentos",
+      "id_aviso",
+      "UUID / Inteiro",
+      "PK",
+      "Sim",
+      "Identificador da mensagem de cobrança gerada"
+    ],
+    [
+      "AvisosRecebimentos",
+      "id_parcela",
+      "UUID / Inteiro",
+      "FK",
+      "Sim",
+      "Vincula à tabela ParcelasAluno"
+    ],
+    [
+      "AvisosRecebimentos",
+      "mensagem_texto",
+      "Texto (255)",
+      "",
+      "Sim",
+      "Conteúdo descritivo do status do recebimento"
+    ],
+    [
+      "AvisosRecebimentos",
+      "prioridade",
+      "Texto (10)",
+      "",
+      "Sim",
+      "BAIXA, MEDIA, URGENTE (inadimplência)"
+    ],
+    [
+      "AvisosRecebimentos",
+      "lido",
+      "Booleano",
+      "",
+      "Sim",
+      "Controle de visualização pelo gestor"
+    ]
+  ],
+  "Relacionamentos": [
+    [
+      "De (Tabela)",
+      "Campo de Origem",
+      "Para (Tabela)",
+      "Campo de Destino",
+      "Tipo de Relação",
+      "Descrição"
+    ],
+    [
+      "ProdutosServicos",
+      "id_categoria",
+      "CategoriasBar",
+      "id_categoria",
+      "N para 1",
+      "Cada produto/serviço pertence a uma categoria"
+    ],
+    [
+      "MovimentacoesEstoque",
+      "id_item",
+      "ProdutosServicos",
+      "id_item",
+      "N para 1",
+      "Cada movimentação refere-se a um item"
+    ],
+    [
+      "ItensNota",
+      "id_nota",
+      "NotasFiscais",
+      "id_nota",
+      "N para 1",
+      "Itens pertencem a uma nota fiscal"
+    ],
+    [
+      "ItensNota",
+      "id_item",
+      "ProdutosServicos",
+      "id_item",
+      "N para 1",
+      "Item da nota vincula-se ao catálogo"
+    ],
+    [
+      "ItensVenda",
+      "id_venda",
+      "Vendas",
+      "id_venda",
+      "N para 1",
+      "Itens pertencem a uma venda"
+    ],
+    [
+      "ItensVenda",
+      "id_item",
+      "ProdutosServicos",
+      "id_item",
+      "N para 1",
+      "Item vendido vincula-se ao catálogo"
+    ],
+    [
+      "Vendas",
+      "id_cliente_aluno",
+      "Alunos",
+      "id_aluno",
+      "N para 1",
+      "Venda a prazo vincula-se a um aluno (opcional)"
+    ],
+    [
+      "ContasPagarBar",
+      "id_nota",
+      "NotasFiscais",
+      "id_nota",
+      "N para 1",
+      "Conta a pagar pode originar-se de uma nota"
+    ],
+    [
+      "ContasReceberBar",
+      "id_venda",
+      "Vendas",
+      "id_venda",
+      "N para 1",
+      "Conta a receber origina-se de venda a prazo"
+    ],
+    [
+      "Alunos",
+      "id_plano",
+      "Planos",
+      "id_plano",
+      "N para 1",
+      "Aluno contrata um plano"
+    ],
+    [
+      "Alunos",
+      "id_professor_titular",
+      "Professores",
+      "id_professor",
+      "N para 1",
+      "Aluno tem um professor titular"
+    ],
+    [
+      "AulasContratos",
+      "id_aluno",
+      "Alunos",
+      "id_aluno",
+      "N para 1",
+      "Contrato refere-se a um aluno"
+    ],
+    [
+      "AulasContratos",
+      "id_professor",
+      "Professores",
+      "id_professor",
+      "N para 1",
+      "Contrato refere-se a um professor"
+    ],
+    [
+      "AulasContratos",
+      "id_plano",
+      "Planos",
+      "id_plano",
+      "N para 1",
+      "Contrato refere-se a um plano"
+    ],
+    [
+      "ParcelasAluno",
+      "id_contrato_aula",
+      "AulasContratos",
+      "id_contrato_aula",
+      "N para 1",
+      "Parcelas pertencem a um contrato de aula"
+    ],
+    [
+      "Comissoes",
+      "id_professor",
+      "Professores",
+      "id_professor",
+      "N para 1",
+      "Comissão é creditada a um professor"
+    ],
+    [
+      "Comissoes",
+      "id_parcela",
+      "ParcelasAluno",
+      "id_parcela",
+      "N para 1",
+      "Comissão origina-se de uma parcela paga"
+    ],
+    [
+      "InscricoesEvento",
+      "id_evento",
+      "Eventos",
+      "id_evento",
+      "N para 1",
+      "Inscrição pertence a um evento"
+    ],
+    [
+      "InscricoesEvento",
+      "id_aluno",
+      "Alunos",
+      "id_aluno",
+      "N para 1",
+      "Inscrição pode vincular-se a um aluno"
+    ],
+    [
+      "AvisosRecebimentos",
+      "id_parcela",
+      "ParcelasAluno",
+      "id_parcela",
+      "N para 1",
+      "Aviso refere-se a uma parcela"
+    ]
+  ],
+  "Valores_Enumerados": [
+    [
+      "Tabela",
+      "Campo",
+      "Valores Permitidos",
+      "Observação"
+    ],
+    [
+      "ProdutosServicos",
+      "tipo",
+      "PRODUTO; SERVICO",
+      "Produto controla estoque; serviço não"
+    ],
+    [
+      "ProdutosServicos",
+      "unidade_medida",
+      "UN; KG; LT; DOSE",
+      "Unidades de medida padrão"
+    ],
+    [
+      "MovimentacoesEstoque",
+      "tipo_movimento",
+      "ENTRADA; SAIDA; AJUSTE",
+      "ENTRADA vem de nota; SAIDA vem de venda"
+    ],
+    [
+      "Vendas",
+      "forma_pagamento",
+      "DINHEIRO; PIX; CARTAO_DEB; CARTAO_CRED; PRAZO",
+      "PRAZO gera conta a receber automaticamente"
+    ],
+    [
+      "Vendas",
+      "status_venda",
+      "FINALIZADA; CANCELADA; AGUARDANDO_PAGAMENTO",
+      "Status do cupom"
+    ],
+    [
+      "Boletos",
+      "tipo_natureza",
+      "PAGAR; RECEBER",
+      "Direção do título"
+    ],
+    [
+      "Boletos",
+      "status_boleto",
+      "ABERTO; PAGO; VENCIDO; CANCELADO",
+      "Situação do boleto"
+    ],
+    [
+      "ContasPagarBar",
+      "status_card",
+      "ABERTO; AGENDADO; VENCIDO; PAGO",
+      "Controla a coluna do card no kanban"
+    ],
+    [
+      "ContasReceberBar",
+      "status_card",
+      "ABERTO; VENCIDO; PAGO",
+      "Controla a coluna do card no kanban"
+    ],
+    [
+      "Alunos",
+      "status_matricula",
+      "ATIVO; TRANCADO; INADIMPLENTE; INATIVO",
+      "Situação do aluno"
+    ],
+    [
+      "ParcelasAluno",
+      "status_parcela",
+      "ABERTA; PAGA; VENCIDA; ISENTA",
+      "Situação da mensalidade"
+    ],
+    [
+      "Comissoes",
+      "status_repasse",
+      "PROVISIONADA; LIBERADA; PAGA",
+      "LIBERADA só após mensalidade PAGA"
+    ],
+    [
+      "Eventos",
+      "status_evento",
+      "ABERTO; LOTADO; EM_ANDAMENTO; FINALIZADO",
+      "Situação do evento"
+    ],
+    [
+      "InscricoesEvento",
+      "status_pagamento",
+      "PENDENTE; CONFIRMADO; ISENTO",
+      "Pagamento da inscrição"
+    ],
+    [
+      "PagamentosAssociacao",
+      "categoria_fixa",
+      "Luz; Água; Telefone; TLL; IPTU; Internet; Professores; Marketing; Diretoria; Contabilidade; Aluguel",
+      "Categorias fixas de despesas da Associação"
+    ],
+    [
+      "PagamentosAssociacao",
+      "status_card",
+      "A_VENCER; VENCENDO; VENCIDO; PAGO",
+      "Controla a coluna do card no kanban"
+    ],
+    [
+      "AvisosRecebimentos",
+      "prioridade",
+      "BAIXA; MEDIA; URGENTE",
+      "URGENTE = parcela vencida"
+    ]
+  ]
+}
